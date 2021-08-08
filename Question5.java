@@ -11,7 +11,7 @@ public class Q5
 		Node t=new Node(50);
 		Node u=new Node(60);
 		
-		head1.next=q;
+	    head1.next=q;
 	    q.next=r;
 	    r.next=s;
 	    s.next=t;
@@ -22,7 +22,7 @@ public class Q5
 		
 		Node res=null;
 	    
-	    // merge 2 LLs into 1 List
+	    // intersection point of both LLs
 	    res=findintersection(head1, head2);
 	
 	    System.out.print(res.data+" ");
