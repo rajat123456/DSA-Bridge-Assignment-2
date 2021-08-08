@@ -4,7 +4,7 @@
  * @author rajatrawat
  */
  
-public class Main {
+public class Q8 {
     
     static int front=-1,rear=-1;
     
@@ -77,7 +77,7 @@ public class Main {
          QueueUsingArray qu=new QueueUsingArray();
          enqueue(root, qu);
          
-         while(size(qu)>=0)
+         while(rear>-1)
          {
             BSTUsingLL bst=dequeue(qu);
             System.out.print(bst.value+" ");
@@ -91,6 +91,8 @@ public class Main {
     // enqueue function
     static void enqueue(BSTUsingLL value, QueueUsingArray qu)
     {
+        if(value==null)
+        return;
         
         if(front==-1)
         front++;
@@ -113,28 +115,25 @@ public class Main {
     {
         
        // whenever front & rear at at same index, means we have 0 elements in queue   
-       if(front==-1 && rear==-1)
+       if(rear==-1)
        {
          System.out.println("Underflow");
          return null;
        }
        
        // wherever front is pointing from the next index onwards we have elements in queue
-       --rear;
        
        BSTUsingLL node= qu.arr[front];
-       --front;
+      
+       ++front;
+       
+       if(front>rear)
+       front=rear=-1;
        
        return node;
     
    }
    
-   // size function
-    static int size(QueueUsingArray qu)
-    {
-       return rear;   
-    }
-    
     // print function
     static void print(QueueUsingArray qu)
     {
@@ -180,5 +179,5 @@ class BSTUsingLL
 //QueueUsingArray class with 1 property: integer array
 class QueueUsingArray
 {
-  BSTUsingLL[]arr=new BSTUsingLL[7];
+  BSTUsingLL[]arr=new BSTUsingLL[6];
 }
