@@ -1,45 +1,45 @@
-// Priority Queues Using Arrays
+// Priority Queue (MAX) Implementation
 
+import java.util.*;
 public class Main
 {
     static PQUsingArray pq=new PQUsingArray();
-    static int front=0;
     
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		
-		insert(10);
-		insert(20);
-        insert(30);
-		insert(40);
+		// insert into PQ
+		insert(10);     //          40
+		insert(20);    //         /   \
+        insert(30);   //        20    30
+		insert(40);  //        / \    / \
+		            //        10  n  n   n
 		
-		System.out.print(pq.arr[0]+" ");
-		for(int q=1;q<pq.arr.length/2;q++)
+		for(int q=0;q<pq.al.size();q++)
 		{
-		    System.out.print(pq.arr[2*q+1]+" ");
-		    System.out.print(pq.arr[2*q+2]+" ");
+		    System.out.print(pq.al.get(q)+" ");
 		}
 		
 		System.out.println();
 		
+		// iremove from PQ
 		remove();
 		remove();
 		remove();
 		
-		System.out.print(pq.arr[0]+" ");
-		for(int q=1;q<pq.arr.length/2;q++)
+		for(int q=0;q<pq.al.size();q++)
 		{
-		    System.out.print(pq.arr[2*q+1]+" ");
-		    System.out.print(pq.arr[2*q+2]+" ");
+		    System.out.print(pq.al.get(q)+" ");
 		}
 		
 	}
 	
 	static void insert(int value)
 	{
-	    pq.arr[front]=value;
-	    ++front;
-	    
-	    upheapify(front-1);
+	    // directly added in the end
+	    pq.al.add(value);
+
+        // upheapify from last index till its correct position	    
+	    upheapify(size()-1);
 	}
 	
 	static void upheapify(int val)
@@ -49,7 +49,7 @@ public class Main
 	    
 	    int parent=(val-1)/2;
 	    
-	    if(pq.arr[parent]<pq.arr[val])
+	    if(pq.al.get(parent)<pq.al.get(val))
 	    {
 	      swap(parent, val);
 	      upheapify(parent);
@@ -58,50 +58,65 @@ public class Main
 	
 	static void remove()
 	{
-	    if(front==0)
+	    if(size()==0)
 	    {
 	      System.out.println("Underflow");
 	      return;
 	    }
 	    
-	    swap(0, front);
-	    --front;
+	    // swap 0th index node with last node
+	    swap(0, size()-1);
+	    
+	    // removing that last node
+	    pq.al.remove(size()-1);
+	    
+	    // downheapify that 0th index node
 	    downheapify(0);
 	}
 	
 	static void downheapify(int val)
 	{
-	    int min=val;
+	    int max=val;
 	    int left=2*val+1;
 	    int right=2*val+2;
 	    
-	    if(left<front && pq.arr[left]<pq.arr[min])
-	    min=left;
+	    // checking that the left index exist or not
+	    if(left<size() && (pq.al.get(left)>pq.al.get(max)))
+	    max=left;
 	    
-	    if(right<front && pq.arr[right]<pq.arr[min])
-	    min=right;
+	    // checking that the right index exist or not
+	    if(right<size() && (pq.al.get(right)>pq.al.get(max)))
+	    max=right;
 	    
-	    if(min!=val)
+	    // if minimum valud index & original index not same then swap them
+	    if(max!=val)
 	    {
-	      swap(min, val);
-	      downheapify(min);
+	      swap(val, max);
+	      
+	      // downheapify on that swapped index
+	      downheapify(max);
 	    }
 	}
 	
 	static void swap(int parent, int val)
 	{
-	    int temp=pq.arr[parent];
-	    pq.arr[parent]=pq.arr[val];
-	    pq.arr[val]=temp;
+	    int temp=pq.al.get(parent);
+	    pq.al.set(parent,pq.al.get(val));
+	    pq.al.set(val,temp);
+	}
+	
+	static int size()
+	{
+	    return pq.al.size();
 	}
 }
 
 class PQUsingArray
 {
-    int[]arr;
+    ArrayList<Integer>al;
     
     PQUsingArray()
     {
-        arr=new int[5];
+        al=new ArrayList<>();
     }
 }
