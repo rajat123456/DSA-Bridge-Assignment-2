@@ -4,7 +4,7 @@
  * @author rajatrawat
  */
  
-public class Q8 {
+public class Main {
     
     static int front=-1,rear=-1;
     
@@ -176,7 +176,7 @@ class BSTUsingLL
   }
 }
     
-//QueueUsingArray class with 1 property: integer array
+//QueueUsingArray class with 1 property: BSTUsingLL array
 class QueueUsingArray
 {
   BSTUsingLL[]arr=new BSTUsingLL[6];
