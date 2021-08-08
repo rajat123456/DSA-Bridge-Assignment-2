@@ -10,7 +10,7 @@ public class Main
 		// insert into PQ
 		insert(10);     //          40
 		insert(20);    //         /   \
-        insert(30);   //        20    30
+        	insert(30);   //        20    30
 		insert(40);  //        / \    / \
 		            //        10  n  n   n
 		
